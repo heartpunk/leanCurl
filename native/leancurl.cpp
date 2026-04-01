@@ -519,7 +519,7 @@ extern "C" LEAN_EXPORT uint8_t lean_curl_handlem_dec_eq(b_lean_obj_arg a, b_lean
 }
 
 extern "C" LEAN_EXPORT lean_object* lean_curl_easy_getinfo_response_code(b_lean_obj_arg h) {
-    Context *context = context_get(h);
+    Context *context = context_get_handle(h);
     long response_code = 0;
     CURLcode res = curl_easy_getinfo(context->curl, CURLINFO_RESPONSE_CODE, &response_code);
     if (res != CURLE_OK) {
