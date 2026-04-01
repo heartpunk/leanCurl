@@ -517,3 +517,13 @@ extern "C" LEAN_EXPORT uint8_t lean_curl_handle_dec_eq(b_lean_obj_arg a, b_lean_
 extern "C" LEAN_EXPORT uint8_t lean_curl_handlem_dec_eq(b_lean_obj_arg a, b_lean_obj_arg b) {
   return contextm_get_handle(a) == contextm_get_handle(b);
 }
+
+extern "C" LEAN_EXPORT lean_object* lean_curl_easy_getinfo_response_code(b_lean_obj_arg h) {
+    Context *context = context_get(h);
+    long response_code = 0;
+    CURLcode res = curl_easy_getinfo(context->curl, CURLINFO_RESPONSE_CODE, &response_code);
+    if (res != CURLE_OK) {
+        return lean_io_result_mk_error(lean_box(res));
+    }
+    return lean_io_result_mk_ok(lean_box((uint32_t)response_code));
+}

@@ -85,4 +85,7 @@ opaque  HandleM.decEq (a b : @& HandleM) : Decidable (Eq a b)
 
 instance : DecidableEq HandleM := HandleM.decEq
 
+@[extern "lean_curl_easy_getinfo_response_code"]
+opaque curl_easy_getinfo_response_code (h : @& Handle) : EIO UInt32 UInt32
+
 end Curl.Extern

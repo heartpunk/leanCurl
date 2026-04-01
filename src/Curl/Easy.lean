@@ -82,6 +82,10 @@ def curl_set_option (curl: Curl.Handle) (opt : CurlOption) : CurlIO Unit := do
 def curl_easy_perform (h : Handle) : CurlIO Unit :=
   toPerformError (Extern.curl_easy_perform h)
 
+/-- Get HTTP response code after perform -/
+def curl_easy_getinfo_response_code (h : Handle) : CurlIO UInt32 :=
+  toPerformError (Extern.curl_easy_getinfo_response_code h)
+
 /-- Perform a network transfer -/
 def curl_easy_perform_with_options (options : Array CurlOption) : CurlIO Unit := do
   let curl ← curl_easy_init
